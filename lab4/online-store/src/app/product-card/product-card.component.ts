@@ -1,0 +1,39 @@
+import { Component, Input } from '@angular/core';
+import { Product } from '../product.model';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-product-card',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './product-card.component.html',
+  styleUrl: './product-card.component.css'
+})
+export class ProductCardComponent {
+  @Input() product!: Product;
+
+  shareOnWhatsApp() {
+    const text = `Посмотри этот товар: ${this.product.name}`;
+    const url = `https://wa.me/?text=${encodeURIComponent(text + ' ' + this.product.link)}`;
+    window.open(url, '_blank');
+  }
+
+  shareOnTelegram() {
+    const url = `https://t.me/share/url?url=${encodeURIComponent(this.product.link)}&text=${encodeURIComponent(this.product.name)}`;
+    window.open(url, '_blank');
+  }
+
+  getStars(rating: number): string[] {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i <= Math.floor(rating)) {
+        stars.push('★');
+      } else if (i - 0.5 <= rating) {
+        stars.push('½');
+      } else {
+        stars.push('☆');
+      }
+    }
+    return stars;
+  }
+}

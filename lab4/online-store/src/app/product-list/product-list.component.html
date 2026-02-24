@@ -1,0 +1,8 @@
+<div class="container">
+  <h1 class="page-title">Товары на Kaspi.kz</h1>
+  <div class="products-grid">
+    @for (product of products; track product.id) {
+      <app-product-card [product]="product"></app-product-card>
+    }
+  </div>
+</div>
