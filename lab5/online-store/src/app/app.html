@@ -1,0 +1,32 @@
+<div class="app-container">
+  <header>
+    <h1>🛍️ Online Store</h1>
+    <p>Выберите категорию товаров</p>
+  </header>
+
+  <nav class="categories-nav">
+    @for (category of categories; track category.id) {
+      <button 
+        class="category-btn"
+        [class.active]="isSelected(category.id)"
+        (click)="selectCategory(category.id)"
+      >
+        {{ category.name }}
+      </button>
+    }
+  </nav>
+
+  <main>
+    @if (selectedCategoryId) {
+      <h2 class="category-title">
+        {{ getCategoryName() }}
+      </h2>
+      <app-product-list [products]="products" />
+    } @else {
+      <div class="welcome-message">
+        <h2>👋 Добро пожаловать!</h2>
+        <p>Нажмите на категорию, чтобы увидеть товары</p>
+      </div>
+    }
+  </main>
+</div>
