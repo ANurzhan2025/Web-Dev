@@ -1,0 +1,22 @@
+<div class="albums-container">
+  <h1>📚 Albums</h1>
+  
+  @if (loading) {
+    <div class="loading">Loading albums...</div>
+  } @else {
+    <div class="albums-grid">
+      @for (album of albums; track album.id) {
+        <div class="album-card">
+          <div class="album-info">
+            <span class="album-id">#{{ album.id }}</span>
+            <h3 class="album-title">{{ album.title }}</h3>
+          </div>
+          <div class="album-actions">
+            <a [routerLink]="['/albums', album.id]" class="view-btn">👁️ View</a>
+            <button (click)="deleteAlbum(album.id)" class="delete-btn">🗑️ Delete</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

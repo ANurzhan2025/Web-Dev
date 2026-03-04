@@ -1,0 +1,38 @@
+<div class="detail-container">
+  <a routerLink="/albums" class="back-btn">← Back to Albums</a>
+
+  @if (loading) {
+    <div class="loading">Loading album...</div>
+  } @else if (album) {
+    <div class="album-detail">
+      <h1>Album #{{ album.id }}</h1>
+      
+      <div class="info-section">
+        <p><strong>User ID:</strong> {{ album.userId }}</p>
+      </div>
+
+      <div class="edit-section">
+        <label for="title">Title:</label>
+        <input 
+          id="title"
+          type="text"
+          [(ngModel)]="editedTitle"
+          class="title-input"
+        >
+        <button 
+          (click)="saveTitle()" 
+          [disabled]="editedTitle === album.title || saving"
+          class="save-btn"
+        >
+          {{ saving ? 'Saving...' : 'Save' }}
+        </button>
+      </div>
+
+      <div class="action-buttons">
+        <a [routerLink]="['/albums', album.id, 'photos']" class="photos-btn">
+          📸 View Photos
+        </a>
+      </div>
+    </div>
+  }
+</div>
